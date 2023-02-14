@@ -37,8 +37,13 @@ function displayTemperature(response) {
   humidityElement.innerHTML = response.data.main.humidity;
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
-  console.log(fromatDate(response.data.dt * 1000));
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 let apikey = "d1a86552de255334f6117b348c4519bd";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=new york&appid=${apikey}&units=metric`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Isfahan&appid=${apikey}&units=metric`;
 axios.get(apiUrl).then(displayTemperature);
